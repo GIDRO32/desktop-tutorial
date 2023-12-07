@@ -2,30 +2,39 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
 
 public class Game : MonoBehaviour
 {
-    public AudioSource Button_Source;
+    public AudioSource Game_Music;
+    public AudioSource Game_SFX;
     public AudioClip Use_Ability;
     public AudioClip Cant_Use_Ability;
     public AudioClip A2_End;
-    public AudioClip Pause_Button;
+    public AudioClip Pause_Click;
     public AudioClip drag;
     public GameObject Player;
     public GameObject Island;
+    public GameObject A1_Button;
+    public GameObject A2_Button;
+    public GameObject Pause_Button;
     public Text survivalTime;
     public Text Ability1;
     public Text Ability2;
+    public Text Earnings;
     private int A1_Count;
     private int A2_Count;
+    private int music_volume;
+    private int sfx_volume;
     public float islandSize;
     private float shrinkSpeed = 0.1f;
     private float playerShrinkSpeed = 0.02f;
     public float playerSize;
     public float islandMoveSpeed;
+    public GameObject Pause;
+    public GameObject LosePanel;
     private float timer;
     private int coins; // New variable to track coins
+    private int income;
     private bool isDragging = false;
     private bool isSpeedChangeActive = false;
     private Vector3 targetPosition;
@@ -33,9 +42,12 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         InvokeRepeating("ChangeIslandPosition", 0f, 3f);
         Player.SetActive(true);
         Island.SetActive(true);
+        Pause.SetActive(false);
+        LosePanel.SetActive(false);
         coins = 0; // Initialize coins count
         A1_Count = PlayerPrefs.GetInt("A1 Num", A1_Count);
         A2_Count = PlayerPrefs.GetInt("A2 Num", A2_Count);
@@ -68,7 +80,7 @@ public class Game : MonoBehaviour
 {
     if (!isSpeedChangeActive && A2_Count > 0)
     {
-        Button_Source.PlayOneShot(Use_Ability);
+        Game_SFX.PlayOneShot(Use_Ability);
         A2_Count--;
         isSpeedChangeActive = true;
 
@@ -76,7 +88,7 @@ public class Game : MonoBehaviour
     }
     else if (A2_Count == 0 || isSpeedChangeActive)
     {
-        Button_Source.PlayOneShot(Cant_Use_Ability);
+        Game_SFX.PlayOneShot(Cant_Use_Ability);
     }
 }
 
@@ -94,7 +106,7 @@ IEnumerator SlowIslandCoroutine()
     islandMoveSpeed = 3;
     playerShrinkSpeed = 0.02f;
 
-    Button_Source.PlayOneShot(A2_End);
+    Game_SFX.PlayOneShot(A2_End);
 
     isSpeedChangeActive = false; // Allow pressing the button again
 }
@@ -102,14 +114,14 @@ IEnumerator SlowIslandCoroutine()
     {
         if(A1_Count > 0)
         {
-            Button_Source.PlayOneShot(Use_Ability);
+            Game_SFX.PlayOneShot(Use_Ability);
             A1_Count--;
             islandSize = 1;
             playerSize = 0.25f;
         }
         else if(A1_Count == 0)
         {
-            Button_Source.PlayOneShot(Cant_Use_Ability);
+            Game_SFX.PlayOneShot(Cant_Use_Ability);
         }
     }
 
@@ -127,7 +139,7 @@ IEnumerator SlowIslandCoroutine()
         {
             // Mouse button pressed, start dragging
             isDragging = true;
-            Button_Source.PlayOneShot(drag);
+            Game_SFX.PlayOneShot(drag);
             // Set the target position to the current mouse cursor position
             targetPosition = GetMouseWorldPosition();
 
@@ -148,13 +160,38 @@ IEnumerator SlowIslandCoroutine()
         // Update survival time
         timer += Time.deltaTime;
         survivalTime.text = Mathf.Round(timer).ToString();
+        coins = Mathf.RoundToInt(timer);
         Ability1.text = A1_Count.ToString();
         Ability2.text = A2_Count.ToString();
+    }
 
-        // Convert survival time to coins (you can adjust the conversion logic)
-        coins = Mathf.RoundToInt(timer);
-        // Save the coins count to PlayerPrefs
-        PlayerPrefs.SetInt("Earnings", coins);
+    public void GamePause()
+    {
+        Pause.SetActive(true);
+        Pause_Button.SetActive(false);
+        A1_Button.SetActive(false);
+        A2_Button.SetActive(false);
+        Game_SFX.PlayOneShot(Pause_Click);
+        Time.timeScale = 0f;
+    }
+
+    public void KeepPlay()
+    {
+        Pause.SetActive(false);
+        Time.timeScale = 1f;
+        Pause_Button.SetActive(true);
+        A1_Button.SetActive(true);
+        A2_Button.SetActive(true);
+        Game_SFX.PlayOneShot(Pause_Click);
+    }
+    public void Home()
+    {
+        income = Mathf.RoundToInt(timer);
+        coins = PlayerPrefs.GetInt("Coins", coins);
+        Earnings.text = "+" + income;
+        coins = coins + income;
+        PlayerPrefs.SetInt("Coins", coins);
+        SceneManager.LoadScene("Menu");
     }
 
     Vector3 GetMouseWorldPosition()
@@ -169,9 +206,16 @@ IEnumerator SlowIslandCoroutine()
     {
         if (other.gameObject == Island)
         {
-            // Player exited the collider (left the island)
-            // Continue the game
-            SceneManager.LoadScene("8GameOver");
+            Time.timeScale = 0f;
+            LosePanel.SetActive(true);
+            A1_Button.SetActive(false);
+            A2_Button.SetActive(false);
+            Pause_Button.SetActive(false);
+            income = Mathf.RoundToInt(timer);
+            coins = PlayerPrefs.GetInt("Coins", coins);
+            Earnings.text = "+" + income;
+            coins = coins + income;
+            PlayerPrefs.SetInt("Coins", coins);
         }
     }
 }
