@@ -17,10 +17,14 @@ public class Game : MonoBehaviour
     public GameObject A1_Button;
     public GameObject A2_Button;
     public GameObject Pause_Button;
+    public GameObject BG1;
+    public GameObject BG2;
+    public GameObject BG3;
     public Text survivalTime;
     public Text Ability1;
     public Text Ability2;
     public Text Earnings;
+    private int Background;
     private int A1_Count;
     private int A2_Count;
     private int music_volume;
@@ -42,6 +46,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Background = PlayerPrefs.GetInt("BG Play", Background);
         Time.timeScale = 1f;
         InvokeRepeating("ChangeIslandPosition", 0f, 3f);
         Player.SetActive(true);
@@ -128,6 +133,33 @@ IEnumerator SlowIslandCoroutine()
     // Update is called once per frame
     void Update()
     {
+        if(Background == 0)
+        {
+            BG1.SetActive(true);
+            BG2.SetActive(false);
+            BG3.SetActive(false);
+            survivalTime.color = Color.blue;
+            Ability1.color = Color.blue;
+            Ability2.color = Color.blue;
+        }
+        if(Background == 1)
+        {
+            BG1.SetActive(false);
+            BG2.SetActive(true);
+            BG3.SetActive(false);
+            survivalTime.color = Color.blue;
+            Ability1.color = Color.blue;
+            Ability2.color = Color.blue;
+        }
+        if(Background == 2)
+        {
+            BG1.SetActive(false);
+            BG2.SetActive(false);
+            BG3.SetActive(true);
+            survivalTime.color = Color.white;
+            Ability1.color = Color.white;
+            Ability2.color = Color.white;
+        }
         islandSize = Mathf.Max(0, islandSize - (Time.deltaTime * shrinkSpeed)); // Shrink island size gradually
         playerSize = Mathf.Max(0, playerSize - (Time.deltaTime * playerShrinkSpeed)); // Shrink player size gradually
 
@@ -211,7 +243,7 @@ IEnumerator SlowIslandCoroutine()
             A1_Button.SetActive(false);
             A2_Button.SetActive(false);
             Pause_Button.SetActive(false);
-            income = Mathf.RoundToInt(timer);
+            income = Mathf.RoundToInt(timer)*10;
             coins = PlayerPrefs.GetInt("Coins", coins);
             Earnings.text = "+" + income;
             coins = coins + income;
