@@ -982,7 +982,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9fb29c3b7ae87864185dbcb86c4d0d69, type: 3}
-    m_FontSize: 2
+    m_FontSize: 3
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

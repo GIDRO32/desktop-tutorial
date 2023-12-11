@@ -25,15 +25,15 @@ public class Tutorial : MonoBehaviour
         }
         if(panel == 2)
         {
-            TutorialOne.text = "Island gets smaller gradually\n";
+            TutorialOne.text = "Island gets \nsmaller gradually";
         }
             if(panel == 3)
         {
-            TutorialOne.text = "Use Green button to make island bigger\nUse Blue button to make island move slower";
+            TutorialOne.text = "Use Green button \nto make island bigger\nUse Blue button to make island\n move slower";
         }
             if(panel == 4)
         {
-            TutorialOne.text = "The number of ability used is limited\nUse them wisely!";
+            TutorialOne.text = "The number of ability usages is limited\nUse them wisely!";
         }
             if(panel == 5)
         {

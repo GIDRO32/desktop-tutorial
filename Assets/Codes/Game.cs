@@ -17,6 +17,8 @@ public class Game : MonoBehaviour
     public GameObject A1_Button;
     public GameObject A2_Button;
     public GameObject Pause_Button;
+    public GameObject Home_Button;
+    public GameObject Settings_Button;
     public GameObject BG1;
     public GameObject BG2;
     public GameObject BG3;
@@ -35,6 +37,8 @@ public class Game : MonoBehaviour
     public float playerSize;
     public float islandMoveSpeed;
     public GameObject Pause;
+    public GameObject Home;
+    public GameObject Settings;
     public GameObject LosePanel;
     private float timer;
     private int coins; // New variable to track coins
@@ -52,10 +56,13 @@ public class Game : MonoBehaviour
         Player.SetActive(true);
         Island.SetActive(true);
         Pause.SetActive(false);
+        Home.SetActive(false);
+        Settings.SetActive(false);
         LosePanel.SetActive(false);
         coins = 0; // Initialize coins count
         A1_Count = PlayerPrefs.GetInt("A1 Num", A1_Count);
         A2_Count = PlayerPrefs.GetInt("A2 Num", A2_Count);
+        Background = PlayerPrefs.GetInt("BG Play", Background);
     }
 
     void ChangeIslandPosition()
@@ -197,26 +204,74 @@ IEnumerator SlowIslandCoroutine()
         Ability2.text = A2_Count.ToString();
     }
 
-    public void GamePause()
+    public void HomeButton()
+    {
+        Home.SetActive(true);
+        Settings_Button.SetActive(false);
+        Pause_Button.SetActive(false);
+        Home_Button.SetActive(false);
+        A1_Button.SetActive(false);
+        A2_Button.SetActive(false);
+        Game_SFX.PlayOneShot(Pause_Click);
+        Time.timeScale = 0f;
+    }
+        public void PauseButton()
     {
         Pause.SetActive(true);
+        Settings_Button.SetActive(false);
         Pause_Button.SetActive(false);
+        Home_Button.SetActive(false);
+        A1_Button.SetActive(false);
+        A2_Button.SetActive(false);
+        Game_SFX.PlayOneShot(Pause_Click);
+        Time.timeScale = 0f;
+    }
+    public void SettingsButton()
+    {
+        Settings.SetActive(true);
+        Settings_Button.SetActive(false);
+        Pause_Button.SetActive(false);
+        Home_Button.SetActive(false);
         A1_Button.SetActive(false);
         A2_Button.SetActive(false);
         Game_SFX.PlayOneShot(Pause_Click);
         Time.timeScale = 0f;
     }
 
-    public void KeepPlay()
+    public void CloseHome()
     {
-        Pause.SetActive(false);
+        Home.SetActive(false);
         Time.timeScale = 1f;
+        Settings_Button.SetActive(true);
         Pause_Button.SetActive(true);
+        Home_Button.SetActive(true);
         A1_Button.SetActive(true);
         A2_Button.SetActive(true);
         Game_SFX.PlayOneShot(Pause_Click);
     }
-    public void Home()
+        public void ClosePause()
+    {
+        Pause.SetActive(false);
+        Time.timeScale = 1f;
+        Settings_Button.SetActive(true);
+        Pause_Button.SetActive(true);
+        Home_Button.SetActive(true);
+        A1_Button.SetActive(true);
+        A2_Button.SetActive(true);
+        Game_SFX.PlayOneShot(Pause_Click);
+    }
+        public void CloseSettings()
+    {
+        Settings.SetActive(false);
+        Time.timeScale = 1f;
+        Settings_Button.SetActive(true);
+        Pause_Button.SetActive(true);
+        Home_Button.SetActive(true);
+        A1_Button.SetActive(true);
+        A2_Button.SetActive(true);
+        Game_SFX.PlayOneShot(Pause_Click);
+    }
+    public void Return()
     {
         income = Mathf.RoundToInt(timer);
         coins = PlayerPrefs.GetInt("Coins", coins);
