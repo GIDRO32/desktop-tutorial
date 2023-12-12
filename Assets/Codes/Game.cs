@@ -298,7 +298,7 @@ IEnumerator SlowIslandCoroutine()
             A1_Button.SetActive(false);
             A2_Button.SetActive(false);
             Pause_Button.SetActive(false);
-            income = Mathf.RoundToInt(timer)*10;
+            income = Mathf.RoundToInt(timer);
             coins = PlayerPrefs.GetInt("Coins", coins);
             Earnings.text = "+" + income;
             coins = coins + income;

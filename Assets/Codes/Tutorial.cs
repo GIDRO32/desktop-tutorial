@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
         }
             if(panel == 3)
         {
-            TutorialOne.text = "Use Green button \nto make island bigger\nUse Blue button to make island\n move slower";
+            TutorialOne.text = "Use Green button \nto make island bigger\nUse Yellow button to make island\n move slower";
         }
             if(panel == 4)
         {
