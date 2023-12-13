@@ -8,9 +8,11 @@ public class Tutorial : MonoBehaviour
 {
     private int panel = 0;
     public Text TutorialOne;
+    public GameObject StartGame;
     void Start()
     {
         TutorialOne.text = "Don't Let Tiger \nFall from the island!";
+        StartGame.SetActive(false);
     }
     public void Next()
     {
@@ -38,11 +40,7 @@ public class Tutorial : MonoBehaviour
             if(panel == 5)
         {
             TutorialOne.text = "Survive to get coins\nYou can use them to increase number of\n ability usages.";
+            StartGame.SetActive(true);
         }
-            if(panel == 6)
-        {
-            SceneManager.LoadScene("Game");
-        }
-        
     }
 }
