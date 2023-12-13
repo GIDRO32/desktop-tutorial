@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GamesSss.ScriptsDDON
 {
-    public class Appps : MonoBehaviour
+    public class DDDONLO : MonoBehaviour
     {
         public void Awake()
         {

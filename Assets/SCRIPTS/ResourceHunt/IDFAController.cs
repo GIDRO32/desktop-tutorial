@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ResourceHunt
 {
-    public class IDFAController : MonoBehaviour
+    public class IDFAController : MonoBehaviour, IAdvertisingIDProvider
     {
         private ATTrackingStatusBinding.AuthorizationTrackingStatus authorizedStatus =
             ATTrackingStatusBinding.AuthorizationTrackingStatus.AUTHORIZED;

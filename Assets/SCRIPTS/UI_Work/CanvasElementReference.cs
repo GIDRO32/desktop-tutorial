@@ -9,6 +9,7 @@ namespace UI_Work
     {
         private Transform textTransform;
 
+
         public void ShowAndScale()
         {
             CanvasHelper.FadeCanvasGroup(gameObject, true);
@@ -23,8 +24,8 @@ namespace UI_Work
 
         private void Awake()
         {
-            textTransform = GetComponentInChildren<TMP_Text>().transform;
-            GetComponentInChildren<Button>().onClick.AddListener(DisableCanvas);
+            textTransform = GetComponent<Transform>();
+
         }
 
         private void DisableCanvas()
