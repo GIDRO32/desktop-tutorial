@@ -68,8 +68,6 @@ namespace GamesSss.ScriptsDDON
 
         private void Load(string eTypeStr)
         {
-            print("need_" + eTypeStr);
-
             if (!string.IsNullOrEmpty(eTypeStr)) _uiView.Load(eTypeStr);
         }
 
