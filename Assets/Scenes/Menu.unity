@@ -7125,6 +7125,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234306, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 938797706104234307, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d4c37a31ad8daa4479d5d6719280fc89, type: 3}
     - target: {fileID: 938797706523770505, guid: ae2d3ff618018494eabec1b3626ed08f, type: 3}
       propertyPath: m_ReferenceResolution.x
       value: 1080
