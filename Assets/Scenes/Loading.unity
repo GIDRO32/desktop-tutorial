@@ -999,7 +999,7 @@ MonoBehaviour:
   - me
   - s/ra
   - mp
-  - 'ig '
+  - ig
 --- !u!4 &1872203715
 Transform:
   m_ObjectHideFlags: 0
