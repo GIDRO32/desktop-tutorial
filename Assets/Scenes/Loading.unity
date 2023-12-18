@@ -353,6 +353,10 @@ PrefabInstance:
       propertyPath: devKey
       value: ZcFyrusHVtDSUpFyc5c22H
       objectReference: {fileID: 0}
+    - target: {fileID: 4405976200006927252, guid: 0bfe3b149145747cc92dc53bb4df4e9b, type: 3}
+      propertyPath: getConversionData
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6207133488976360133, guid: 0bfe3b149145747cc92dc53bb4df4e9b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1411,7 +1415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 81fdc5e754f75b042acc7e8b82f8813e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4c37a31ad8daa4479d5d6719280fc89, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
